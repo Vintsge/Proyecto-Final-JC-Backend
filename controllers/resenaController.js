@@ -1,4 +1,4 @@
-const resena = require('../models/resenaModel');
+const resena = require('../models/resenaModels');
 
 // CRUD - Crear una nueva reseña
 exports.crearResena = async (req, res) => {

@@ -20,6 +20,14 @@ mongoose.connect(MONGODB_URL)//Iniciar la conexión a la base de datos
         console.error('Error al conectar a la base de datos:', err.message);// Si no =>Mensaje de error
     });
 
+// Importar las rutas
+const juegoRoutes = require('./routes/juegoRoutes');
+const resenaRoutes = require('./routes/resenaRoutes');
+
+// Usar las rutas
+app.use('/api/juegos', juegoRoutes);
+app.use('/api/resenas', resenaRoutes);
+
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`); //Mensaje de éxito al iniciar el servidor
