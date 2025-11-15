@@ -3,6 +3,7 @@ require('dotenv').config(); /*Conecta el archivo .env*/
 // Importar dependenciasg
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express(); // Objeto principal donde se definir las rutas y arrancar el servidor
 
 // Configurar el puerto desde el archivo .env o usar el puerto 3000 por defecto
@@ -11,6 +12,7 @@ const MONGODB_URL = process.env.MONGODB_URL; // URL de conexión a MongoDB desde
 
 // Traducir las peticiones con formato JSON
 app.use(express.json());
+app.use(cors()); // Habilitar CORS para permitir peticiones desde el frontend
 
 mongoose.connect(MONGODB_URL)//Iniciar la conexión a la base de datos
     .then(() => {
