@@ -1,11 +1,31 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-// Definir el esquema para el modelo de Reseña
-const resenaSchema = new Schema({
-    juego: {type: Schema.Types.ObjectId, ref: 'Juego', required: true}, // Referencia al juego
-    autor: {type: Schema.Types.ObjectId, ref: 'Usuario', required: true},
-    // Referencia al usuario que hizo la reseña
-    calificacion: {type: Number, required: true, min: 1, max: 5}, 
-    comentario: {type: String, required: [true,'El comentario es obligatorio' ]}, 
-}, {timestamps: true}); // Marca de tiempo para saber cuándo se creó o actualizó la reseña 
-module.exports = mongoose.model('Resena', resenaSchema); // Exportar el modelo de Reseña
+const mongoose = require('mongoose'); // Importa Mongoose
+const { Schema } = mongoose; // Extrae la clase Schema de Mongoose
+
+// Define el esquema para la reseña
+const ResenaSchema = new mongoose.Schema({
+  
+  // Relaciona la reseña con un juego específico
+  juego: {
+    type: Schema.Types.ObjectId, // Tipo ObjectId para relacionar con otro documento
+    ref: 'Juego', // Hace referencia al modelo Juego
+    required: true // Campo obligatorio
+  },
+
+  puntuacion: {  
+    type: Number, required: true, min: 1, max: 5 
+  },
+
+  texto: { 
+    type: String, required: [true, 'El texto de la reseña es obligatorio'] 
+  },
+  
+  autor: {
+    type: String, default: 'Usuario GameTracker'
+  }
+
+}, {
+  timestamps: true // Agrega automáticamente createdAt y updatedAt
+});
+
+// Exporta el modelo Resena para usarlo en controladores
+module.exports = mongoose.model('Resena', ResenaSchema);
